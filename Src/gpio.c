@@ -106,6 +106,24 @@ void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 2 */
 
+void GPIO_Poll (uint16_t * p_button_state)
+{
+	*p_button_state = 0;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin);
+	*p_button_state |= HAL_GPIO_ReadPin(BTN2_GPIO_Port, BTN2_Pin) << 1;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) << 2;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) << 3;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN5_GPIO_Port, BTN5_Pin) << 4;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN6_GPIO_Port, BTN6_Pin) << 5;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN7_GPIO_Port, BTN7_Pin) << 6;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN8_GPIO_Port, BTN8_Pin) << 7;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN9_GPIO_Port, BTN9_Pin) << 8;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN10_GPIO_Port, BTN10_Pin) << 9;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN11_GPIO_Port, BTN11_Pin) << 10;
+	*p_button_state |= HAL_GPIO_ReadPin(BTN12_GPIO_Port, BTN12_Pin) << 11;
+	*p_button_state ^= 0x0FFF;
+}
+
 /* USER CODE END 2 */
 
 /**

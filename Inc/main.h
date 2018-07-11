@@ -56,38 +56,39 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define LED1_Pin GPIO_PIN_0
-#define LED1_GPIO_Port GPIOB
-#define LED2_Pin GPIO_PIN_1
-#define LED2_GPIO_Port GPIOB
-#define LED3_Pin GPIO_PIN_10
-#define LED3_GPIO_Port GPIOB
-#define LED4_Pin GPIO_PIN_11
-#define LED4_GPIO_Port GPIOB
-#define BTN1_Pin GPIO_PIN_12
-#define BTN1_GPIO_Port GPIOB
-#define BTN2_Pin GPIO_PIN_13
-#define BTN2_GPIO_Port GPIOB
-#define BTN3_Pin GPIO_PIN_14
-#define BTN3_GPIO_Port GPIOB
-#define BTN4_Pin GPIO_PIN_15
-#define BTN4_GPIO_Port GPIOB
-#define BTN5_Pin GPIO_PIN_8
-#define BTN5_GPIO_Port GPIOA
-#define BTN6_Pin GPIO_PIN_9
-#define BTN6_GPIO_Port GPIOA
-#define BTN7_Pin GPIO_PIN_10
-#define BTN7_GPIO_Port GPIOA
-#define BTN8_Pin GPIO_PIN_3
-#define BTN8_GPIO_Port GPIOB
-#define BTN9_Pin GPIO_PIN_4
-#define BTN9_GPIO_Port GPIOB
-#define BTN10_Pin GPIO_PIN_5
-#define BTN10_GPIO_Port GPIOB
-#define BTN11_Pin GPIO_PIN_6
-#define BTN11_GPIO_Port GPIOB
-#define BTN12_Pin GPIO_PIN_7
-#define BTN12_GPIO_Port GPIOB
+#define LED1_Pin 					GPIO_PIN_0
+#define LED1_GPIO_Port 		GPIOB
+#define LED2_Pin 					GPIO_PIN_1
+#define LED2_GPIO_Port 		GPIOB
+#define LED3_Pin 					GPIO_PIN_10
+#define LED3_GPIO_Port 		GPIOB
+#define LED4_Pin 					GPIO_PIN_11
+#define LED4_GPIO_Port 		GPIOB
+#define BTN1_Pin 					GPIO_PIN_12
+#define BTN1_GPIO_Port 		GPIOB
+#define BTN2_Pin 					GPIO_PIN_13
+#define BTN2_GPIO_Port 		GPIOB
+#define BTN3_Pin 					GPIO_PIN_14
+#define BTN3_GPIO_Port 		GPIOB
+#define BTN4_Pin 					GPIO_PIN_15
+#define BTN4_GPIO_Port 		GPIOB
+#define BTN5_Pin				 	GPIO_PIN_8
+#define BTN5_GPIO_Port 		GPIOA
+#define BTN6_Pin 					GPIO_PIN_9
+#define BTN6_GPIO_Port 		GPIOA
+#define BTN7_Pin 					GPIO_PIN_10
+#define BTN7_GPIO_Port 		GPIOA
+#define BTN8_Pin 					GPIO_PIN_3
+#define BTN8_GPIO_Port 		GPIOB
+#define BTN9_Pin 					GPIO_PIN_4
+#define BTN9_GPIO_Port 		GPIOB
+#define BTN10_Pin 				GPIO_PIN_5
+#define BTN10_GPIO_Port 	GPIOB
+#define BTN11_Pin 				GPIO_PIN_6
+#define BTN11_GPIO_Port 	GPIOB
+#define BTN12_Pin 				GPIO_PIN_7
+#define BTN12_GPIO_Port 	GPIOB
+
 
 /* USER CODE BEGIN Private defines */
 #define THROTTLE_ENABLED				0					// 1 for enabled, 0 for disabled

@@ -284,7 +284,7 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
     0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
     0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
     0x75, 0x01,                    //   REPORT_SIZE (1)
-    0x95, BUTTONS_NUM,             //   REPORT_COUNT (x)
+    0x95, 0x10,        						 //   REPORT_COUNT (16)
     0x81, 0x02,                    //   INPUT (Data,Var,Abs)
 #endif	//	(BUTTONS_NUM > 0)
     0xc0,                          // END_COLLECTION
@@ -295,6 +295,10 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
 
 #if (SECONDARY_AXIS_NUM > 3)
 	#error "Too many secondary axis are defined!"
+#endif
+
+#if (BUTTONS_NUM	> 12)
+	#error "Too many buttons are defined!"
 #endif
 
 #if (LEDS_NUM	> 0)

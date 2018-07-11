@@ -69,7 +69,8 @@
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void GPIO_Poll (uint16_t * p_button_state);
+	 
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
