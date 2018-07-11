@@ -218,31 +218,88 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
 {
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
     0x09, 0x04,                    // USAGE (Joystick)
-    0xa1, 0x02,                    //   COLLECTION (Logical)
+    0xa1, 0x01,                    // COLLECTION (Application)
+#if (THROTTLE_ENABLED == 1)
     0x05, 0x02,                    //   USAGE_PAGE (Simulation Controls)
-    0x05, 0x0a,                    //   USAGE_PAGE (Ordinals)
-    0x09, 0x01,                    //   USAGE (Instance 1)
-    0xa1, 0x00,                    //   COLLECTION (Physical)
-    0x05, 0x02,                    //     USAGE_PAGE (Simulation Controls)
-    0x09, 0xbb,                    //     USAGE (Throttle)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0x00, 0x10,              //     LOGICAL_MAXIMUM (4096)
-    0x75, 0x10,                    //     REPORT_SIZE (16)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
+    0x09, 0xbb,                    //   USAGE (Throttle)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x26, 0x00, 0x10,              //   LOGICAL_MAXIMUM (4096)
+    0x75, 0x10,                    //   REPORT_SIZE (16)
+    0x95, 0x01,                    //   REPORT_COUNT (1)
     0x81, 0x02,                    //   INPUT (Data,Var,Abs)
-    0xc0,                          //   END_COLLECTION
-    0x05, 0x0a,                    //   USAGE_PAGE (Ordinals)
-    0x09, 0x02,                    //   USAGE (Instance 2)
+#endif	// (THROTTLE_ENABLED == 1)
+	
+#if (RUDDER_ENABLED == 1)
+    0x05, 0x02,                    //   USAGE_PAGE (Simulation Controls)
+    0x09, 0xba,                    //   USAGE (Rudder)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x26, 0x00, 0x10,              //   LOGICAL_MAXIMUM (4096)
+    0x75, 0x10,                    //   REPORT_SIZE (16)
+    0x95, 0x01,                    //   REPORT_COUNT (1)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+#endif	// (THROTTLE_ENABLED == 1)
+	
+#if (JOYSTICK_AXIS_NUM > 0)
+    0x05, 0x01,                    //   USAGE_PAGE (Generic Desktop)
+    0x09, 0x01,                    //   USAGE (Pointer)
     0xa1, 0x00,                    //   COLLECTION (Physical)
-    0x05, 0x02,                    //     USAGE_PAGE (Simulation Controls)
-    0x09, 0xbb,                    //     USAGE (Throttle 1)
+    0x09, 0x30,                    //     USAGE (X)
+	#if (JOYSTICK_AXIS_NUM > 1)
+    0x09, 0x31,                    //     USAGE (Y)
+	#endif
+	#if (JOYSTICK_AXIS_NUM > 2)
+    0x09, 0x32,                    //     USAGE (Z)
+	#endif
     0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
     0x26, 0x00, 0x10,              //     LOGICAL_MAXIMUM (4096)
     0x75, 0x10,                    //     REPORT_SIZE (16)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
+    0x95, JOYSTICK_AXIS_NUM,       //     REPORT_COUNT (x)
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0xc0,                          //     END_COLLECTION
-    0xc0                           // END_COLLECTION
+    0xc0,                          //   END_COLLECTION
+#endif		// (JOYSTICK_AXIS_NUM > 0)
+
+#if (SECONDARY_AXIS_NUM > 0)
+    0x05, 0x01,                    //   USAGE_PAGE (Generic Desktop)
+    0x09, 0x01,                    //   USAGE (Pointer)
+    0xa1, 0x00,                    //   COLLECTION (Physical)
+    0x09, 0x33,                    //     USAGE (Rx)
+	#if (SECONDARY_AXIS_NUM > 1)
+    0x09, 0x34,                    //     USAGE (Ry)
+	#endif
+	#if (SECONDARY_AXIS_NUM > 2)	
+    0x09, 0x35,                    //     USAGE (Rz)
+	#endif
+    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+    0x26, 0x00, 0x10,              //     LOGICAL_MAXIMUM (4096)
+    0x75, 0x10,                    //     REPORT_SIZE (16)
+    0x95, SECONDARY_AXIS_NUM,      //     REPORT_COUNT (x)
+    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+    0xc0,                          //   END_COLLECTION
+#endif		// (SECONDARY_AXIS_NUM > 0)
+
+#if (BUTTONS_NUM > 0)
+    0x05, 0x09,                    //   USAGE_PAGE (Button)
+    0x19, 0x01,                    //   USAGE_MINIMUM (Button 1)
+    0x29, BUTTONS_NUM,             //   USAGE_MAXIMUM (Button x)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+    0x75, 0x01,                    //   REPORT_SIZE (1)
+    0x95, BUTTONS_NUM,             //   REPORT_COUNT (x)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+#endif	//	(BUTTONS_NUM > 0)
+    0xc0,                          // END_COLLECTION
+
+#if (JOYSTICK_AXIS_NUM > 3)
+	#error "Too many joystick axis are defined!"
+#endif
+
+#if (SECONDARY_AXIS_NUM > 3)
+	#error "Too many secondary axis are defined!"
+#endif
+
+#if (LEDS_NUM	> 0)
+	#error "Leds are not supported in this version!"
+#endif
 }; 
 
 /**

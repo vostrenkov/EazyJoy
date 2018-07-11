@@ -63,8 +63,14 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint16_t ADC_data[ADC_CHANNELS_NUM];
 uint8_t data_ready = 0;
+
+uint32_t filter_buf[AXIS_NUM][FILTER_WINDOW_SIZE];
+uint16_t report_data[AXIS_NUM];
+
+uint16_t ADC_data[ADC_CHANNELS_NUM];
+
+
 
 /* USER CODE END PV */
 
@@ -73,6 +79,7 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
+uint16_t FilterWindow (uint32_t * p_buf, uint16_t new_val);
 
 /* USER CODE END PFP */
 
@@ -124,7 +131,11 @@ int main(void)
   /* USER CODE BEGIN 3 */
 		if (data_ready != 0)
 		{
-			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)ADC_data, ADC_CHANNELS_USED*sizeof(uint16_t));
+			for (uint8_t i=0; i<AXIS_NUM; i++)
+			{
+				report_data[i] = FilterWindow(filter_buf[i], ADC_data[i]);
+			}
+			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)report_data, AXIS_NUM*sizeof(uint16_t));
 			data_ready = 0;
 		}
   }
@@ -190,6 +201,29 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+uint16_t FilterWindow (uint32_t * p_buf, uint16_t new_val)
+{
+	uint16_t ret;
+	
+	p_buf[FILTER_WINDOW_SIZE-1] = new_val;
+	
+	for (uint8_t i=2; i<=FILTER_WINDOW_SIZE; i++)
+	{
+		p_buf[FILTER_WINDOW_SIZE-1] += p_buf[FILTER_WINDOW_SIZE - i];
+	}
+	
+	p_buf[FILTER_WINDOW_SIZE-1] /= FILTER_WINDOW_SIZE;
+	
+	ret = p_buf[FILTER_WINDOW_SIZE-1];
+
+	for (int i=0; i<FILTER_WINDOW_SIZE; i++)
+	{
+		p_buf[i-1] = p_buf[i];
+	}
+	
+		return ret;
+}
 
 /* USER CODE END 4 */
 

@@ -52,6 +52,8 @@
 #include "usbd_desc.h"
 #include "usbd_conf.h"
 
+#include "stdio.h"
+
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
@@ -76,7 +78,7 @@
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
 #define USBD_PID_FS     0x5757
 #define USBD_PRODUCT_STRING_FS     "FeelCustom OpenJoy"
-#define USBD_SERIALNUMBER_STRING_FS     "00000000001A"
+//#define USBD_SERIALNUMBER_STRING_FS     "00000000001A"
 #define USBD_CONFIGURATION_STRING_FS     "HID Config"
 #define USBD_INTERFACE_STRING_FS     "HID Interface"
 
@@ -247,6 +249,13 @@ uint8_t *  USBD_FS_ManufacturerStrDescriptor( USBD_SpeedTypeDef speed , uint16_t
 */
 uint8_t *  USBD_FS_SerialStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
+	uint8_t USBD_SERIALNUMBER_STRING_FS[13];
+	uint32_t rand1 = ( *( uint32_t* )DEVICE_ID1 ^  *( uint32_t* )DEVICE_ID2 );
+	uint32_t rand2 = ( *( uint32_t* )DEVICE_ID3 ^  *( uint32_t* )DEVICE_ID4 );
+	
+	sprintf( (char *) USBD_SERIALNUMBER_STRING_FS, "%012X", rand1 ^ rand2) ;
+	USBD_SERIALNUMBER_STRING_FS[12] = 0;
+	
   if(speed  == USBD_SPEED_HIGH)
   {    
     USBD_GetString (USBD_SERIALNUMBER_STRING_FS, USBD_StrDesc, length);
