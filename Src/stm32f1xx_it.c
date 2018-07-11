@@ -37,6 +37,8 @@
 
 /* USER CODE BEGIN 0 */
 
+extern TIM_HandleTypeDef htim3;
+extern uint8_t data_ready;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -195,7 +197,7 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE END DMA1_Channel1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_adc1);
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
-
+	data_ready = 1;
   /* USER CODE END DMA1_Channel1_IRQn 1 */
 }
 
@@ -214,6 +216,20 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+
+/**
+* @brief This function handles TIM3 global interrupt.
+*/
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+  HAL_NVIC_ClearPendingIRQ(TIM3_IRQn);
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
+}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

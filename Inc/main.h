@@ -90,6 +90,11 @@
 #define BTN12_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+#define ADC_CHANNELS_NUM				8
+#define ADC_CHANNELS_USED				2
+
+#define BUTTONS_NUM							0
+#define LEDS_NUM								0
 
 /* USER CODE END Private defines */
 

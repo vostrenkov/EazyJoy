@@ -54,9 +54,8 @@
 #include "usb_device.h"
 #include "gpio.h"
 
-
-
 /* USER CODE BEGIN Includes */
+#include "usbd_hid.h"
 
 /* USER CODE END Includes */
 
@@ -64,6 +63,8 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+uint16_t ADC_data[ADC_CHANNELS_NUM];
+uint8_t data_ready = 0;
 
 /* USER CODE END PV */
 
@@ -110,7 +111,8 @@ int main(void)
   MX_TIM3_Init();
 
   /* USER CODE BEGIN 2 */
-
+	if(HAL_TIM_Base_Start_IT(&htim3) != HAL_OK) Error_Handler();
+  if(HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&ADC_data[0],8*sizeof(uint16_t)) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,7 +122,11 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-
+		if (data_ready != 0)
+		{
+			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)ADC_data, ADC_CHANNELS_USED*sizeof(uint16_t));
+			data_ready = 0;
+		}
   }
   /* USER CODE END 3 */
 
