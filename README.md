@@ -1,8 +1,8 @@
-# OpenJoy
+# FreeJoy
 OpenJoy implements USB HID joystick device with flexible configuration. It is based on STM32F103C8 microcontroller and supports up to 8 analog axes and 12 digital inputs (buttons).
 
 ## Flexibility
-OpenJoy allows to select the configuration of joystick device you exectly need. For example you can choose any of axes shown below:
+FreeJoy allows to select the configuration of joystick device you exectly need. For example you can choose any of axes shown below:
 
 * Up to 3-axis joystick axes (X, Y and Z)
 * Up to 3 linear axes 
