@@ -93,8 +93,8 @@
 /* USER CODE BEGIN Private defines */
 #define THROTTLE_ENABLED				0					// 1 for enabled, 0 for disabled
 #define RUDDER_ENABLED					0					// 1 for enabled, 0 for disabled
-#define JOYSTICK_AXIS_NUM				0
-#define SECONDARY_AXIS_NUM			2
+#define JOYSTICK_AXIS_NUM				3
+#define SECONDARY_AXIS_NUM			0
 
 #define BUTTONS_NUM							0
 #define LEDS_NUM								0

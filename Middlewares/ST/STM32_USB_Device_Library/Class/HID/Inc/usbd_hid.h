@@ -54,7 +54,7 @@
 
 #define USB_HID_CONFIG_DESC_SIZ       34
 #define USB_HID_DESC_SIZ              9
-#define HID_MOUSE_REPORT_DESC_SIZE    ( (7) + ((15) * (THROTTLE_ENABLED)) + ((15) * (RUDDER_ENABLED)) + \
+#define HID_DEVICE_REPORT_DESC_SIZE    ( (7) + ((15) * (THROTTLE_ENABLED)) + ((15) * (RUDDER_ENABLED)) + \
 																			((18) * (JOYSTICK_AXIS_ENABLED)) + ((JOYSTICK_AXIS_NUM) * (2)) + \
 																			((18) * (SECONDARY_AXIS_ENABLED)) + ((SECONDARY_AXIS_NUM) * (2)) + \
 																			((BUTTONS_ENABLED) * (16)) )

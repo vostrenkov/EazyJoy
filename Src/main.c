@@ -65,7 +65,9 @@
 /* Private variables ---------------------------------------------------------*/
 uint8_t data_ready = 0;
 
+#if (AXIS_NUM > 0)
 uint32_t filter_buf[AXIS_NUM][FILTER_WINDOW_SIZE];
+#endif
 uint16_t report_data[AXIS_NUM + BUTTONS_ENABLED];
 
 uint16_t buttons_state;
@@ -134,14 +136,16 @@ int main(void)
 		{
 			GPIO_Poll(&buttons_state);
 			
-			for (uint8_t i=0; i<AXIS_NUM; i++)
-			{
-				report_data[i] = FilterWindow(filter_buf[i], ADC_data[i]);
-			}
+#if (AXIS_NUM > 0)
+				for (uint8_t i=0; i<AXIS_NUM; i++)
+					report_data[i] = FilterWindow(filter_buf[i], ADC_data[i]);
+#endif
+			
 #if (BUTTONS_ENABLED == 1)
 			report_data[AXIS_NUM] = buttons_state;
-#endif			
-			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)report_data, (AXIS_NUM + BUTTONS_ENABLED)*sizeof(uint16_t));
+#endif
+			
+			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*) &report_data, (AXIS_NUM + BUTTONS_ENABLED)*sizeof(uint16_t));
 			data_ready = 0;
 		}
   }
