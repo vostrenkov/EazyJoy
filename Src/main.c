@@ -63,7 +63,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t data_ready = 0;
+volatile uint8_t data_ready = 0;
 
 #if (AXIS_NUM > 0)
 uint32_t filter_buf[AXIS_NUM][FILTER_WINDOW_SIZE];
