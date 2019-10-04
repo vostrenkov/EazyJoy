@@ -28,6 +28,18 @@ Axis priotiries from highest to lowest:
 - Secondary linear axis 2 (Ry)
 - Secondary linear axis 3 (Rz)
 
+Please note that any axis or buttons you need enabled will need to be configured in `main.h` prior to compilation.
+
+For example:
+
+```
+#define THROTTLE_ENABLED				1 // To enable the Throttle Axis
+
+and
+
+#define BUTTONS_NUM							5 // Enable 5 of the buttons
+```
+
 ### Notes
 You cannot map Joystick Y-axis without using Joystick X-axis. If you want to use the only axis in Joystick or Linear Axis groupe it will always be X-axis or Rx-axis respectively. Z and Rz axes cannot be mapped without X, Y and Rx, Ry too.
 
