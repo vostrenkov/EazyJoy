@@ -1,5 +1,5 @@
 # EazyJoy
-EazyJoy implements USB HID joystick device with flexible configuration. It is based on STM32F103C8 microcontroller and supports up to 8 analog axes and 12 digital inputs (buttons).
+EazyJoy implements USB HID joystick device with flexible configuration. It is based on STM32F103C8 microcontroller and supports up to 8 analog axes and 12 digital inputs (buttons). If more features are requied (like matrix of buttons, encoders, etc.) check out daughter project [FreeJoy](https://github.com/vostrenkov/FreeJoy).
 
 ## Flexibility
 EazyJoy allows to select the configuration of joystick device you exactly need. You can choose any of inputs shown below:
